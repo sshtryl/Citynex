@@ -1,16 +1,41 @@
-"use client"
-import { useAuth } from "@/lib/useAuth"
-import { Mail } from 'lucide-react'
-import { useRouter } from "next/navigation"
+"use client";
+import { useAuth } from "@/lib/useAuth";
+import { useFeed } from "@/lib/useFeed";
+import { FeedList } from "./feedList";
 
 export function HomeContent() {
-  const router = useRouter()
-  const { user } = useAuth({ required: true })
+    const { user } = useAuth({ required: true });
+    const {
+        reports,
+        isLoading,
+        error,
+        pagination,
+        isLiking,
+        toggleLike,
+        loadMore
+    } = useFeed();
 
+    const hasMore = pagination.page < pagination.totalPages;
 
-  return (
-    <div className="min-h-screen bg-white">
+    const handleLike = async (reportId: string, isCurrentlyLiked: boolean) => {
+        await toggleLike(reportId, isCurrentlyLiked);
+    };
 
-    </div>
-  )
+    return (
+        <div className="min-h-screen mx-auto w-full">
+            <main className="flex justify-center py-8 px-4">
+                <div className="w-full max-w-lg">
+                    <FeedList
+                        reports={reports}
+                        isLoading={isLoading}
+                        error={error}
+                        hasMore={hasMore}
+                        isLiking={isLiking}
+                        onLike={handleLike}
+                        onLoadMore={loadMore}
+                    />
+                </div>
+            </main>
+        </div>
+    );
 }

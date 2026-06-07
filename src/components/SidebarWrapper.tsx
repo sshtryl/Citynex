@@ -5,7 +5,6 @@ import { SidebarLogo } from "@/components/sidebar/SidebarLogo";
 import { SidebarNavLinks } from "@/components/sidebar/SidebarNavLinks";
 import { SidebarBottom } from "@/components/sidebar/SidebarBottom";
 
-
 export function SidebarWrapper() {
   const [open, setOpen] = useState(false);
 
@@ -16,13 +15,13 @@ export function SidebarWrapper() {
           <SidebarLogo open={open} />
           <SidebarDivider />
           <div className="px-2.5">
-          <SidebarNavLinks />
+            <SidebarNavLinks />
           </div>
         </div>
 
         <div className="flex flex-col gap-2 pb-4">
           <div className="px-2.5">
-          <SidebarBottom />
+            <SidebarBottom />
           </div>
         </div>
       </SidebarBody>
